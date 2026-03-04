@@ -1,0 +1,1 @@
+// Handles communication with the Gemini API to generate audience sentiment summaries and classifications.

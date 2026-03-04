@@ -1,0 +1,1 @@
+// Defines TypeScript types and interfaces representing movie metadata used across the application.

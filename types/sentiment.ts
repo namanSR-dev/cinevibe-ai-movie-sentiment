@@ -1,0 +1,1 @@
+// Defines TypeScript types for AI-generated sentiment summaries and classification results.

@@ -1,0 +1,1 @@
+// Service responsible for fetching movie metadata (title, poster, cast, ratings, plot) from the OMDb API.

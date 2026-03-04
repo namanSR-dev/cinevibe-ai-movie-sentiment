@@ -1,0 +1,1 @@
+// Validates and exposes required environment variables such as API keys used by server-side services.

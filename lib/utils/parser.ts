@@ -1,0 +1,1 @@
+// Provides helper functions to safely parse and normalize AI responses into structured application data.
