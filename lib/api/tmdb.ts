@@ -1,1 +1,1 @@
-// Service responsible for retrieving audience reviews and related movie data from the TMDB API.
+// Responsible for fetching audience reviews from the TMDB API (to be implemented later)
