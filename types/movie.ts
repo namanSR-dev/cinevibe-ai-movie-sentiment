@@ -5,7 +5,7 @@
 export interface Movie {
   id: string;
   title: string;
-  year: string;
+  releaseDate: string
   poster: string;
   plot: string;
   cast: string[];

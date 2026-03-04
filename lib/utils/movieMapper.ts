@@ -37,7 +37,7 @@ export function mapOmdbToMovie(data: OmdbMovieResponse): Movie {
   return {
     id: data.imdbID,
     title: data.Title,
-    year: data.Year,
+    releaseDate: data.Released,
     poster: data.Poster,
     plot: data.Plot,
     cast: data.Actors.split(",").map(actor => actor.trim()),
