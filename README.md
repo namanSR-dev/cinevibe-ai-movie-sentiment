@@ -233,7 +233,7 @@ These ensure the system remains usable even when AI processing takes longer.
 
 Clone the repository:
 
-git clone `<repository-url>`
+git clone `https://github.com/namanSR-dev/cinevibe-ai-movie-sentiment.git`
 
 Install dependencies:
 
@@ -251,9 +251,10 @@ Run the development server:
 
 ```
 npm run dev
+```
 
 Run unit tests:
-
+```
 npm run test
 ```
 
@@ -292,10 +293,10 @@ Possible production enhancements include:
 
 # Author
 
-***Naman Singh
-B.Tech Computer Science & Engineering***
+***Naman Singh***
+B.Tech Computer Science & Engineering
 
-***email* **: namansingh99694@gmail.com
+***email***: namansingh99694@gmail.com
 
 This project demonstrates full-stack development practices, structured API orchestration, and responsible integration of AI systems.
 
