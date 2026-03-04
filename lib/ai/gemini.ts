@@ -1,6 +1,9 @@
-// Wrapper around the Gemini helpers that keeps the public API
-// surface minimal and mirrors the style used for other services
-// like `tmdb.ts`.
+/**
+ * Gemini sentiment service facade.
+ *
+ * Provides a narrow public API for sentiment analysis so route handlers do not
+ * depend on prompt-building and response-cleaning implementation details.
+ */
 
 import { MovieSentiment } from "@/types/sentiment";
 import {
@@ -9,9 +12,16 @@ import {
   cleanAndParseSentiment,
 } from "./geminiClient";
 
+/**
+ * Runs AI sentiment analysis on sanitized audience review text.
+ *
+ * Input: review content array prepared by the TMDB service layer.
+ * Output: structured `MovieSentiment` used directly by the UI.
+ */
 export async function analyzeMovieSentiment(
   reviews: string[],
 ): Promise<MovieSentiment> {
+  // Early validation avoids unnecessary model calls and keeps failure reasons explicit.
   if (!reviews.length) {
     throw new Error("No reviews provided for sentiment analysis");
   }

@@ -1,9 +1,17 @@
-// Converts raw OMDb response into normalized Movie object
+/**
+ * Movie mapping utilities.
+ *
+ * Translates provider-specific OMDb payloads into the normalized `Movie` type
+ * used by UI components and API responses.
+ */
 
 import { Movie } from "@/types/movie";
 
-// Raw response returned by OMDb API
-// since the structure of response is known, it's not good practice to use "any" as type.
+/**
+ * Raw response shape returned by OMDb for a movie record.
+ *
+ * Keeping this explicit protects the mapping boundary from accidental `any` usage.
+ */
 export interface OmdbMovieResponse {
   Title: string;
   Year: string;
@@ -33,6 +41,12 @@ export interface OmdbMovieResponse {
   Response: string;
 }
 
+/**
+ * Maps OMDb fields to the app's stable movie contract.
+ *
+ * Input: raw OMDb movie payload.
+ * Output: normalized `Movie` object consumed by frontend components.
+ */
 export function mapOmdbToMovie(data: OmdbMovieResponse): Movie {
   return {
     id: data.imdbID,

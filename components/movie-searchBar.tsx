@@ -1,12 +1,24 @@
+/**
+ * Movie search form component.
+ *
+ * Captures IMDb IDs and forwards sanitized input to the page-level search
+ * handler without embedding API logic in the UI layer.
+ */
 "use client";
 
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+/**
+ * Renders the IMDb ID input and submit action used to trigger analysis.
+ */
 export function MovieSearch({ onSearch }: { onSearch: (id: string) => void }) {
   const [imdbId, setImdbId] = useState("");
 
+  /**
+   * Normalizes user input before propagating it to the parent workflow.
+   */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 

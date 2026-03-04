@@ -1,6 +1,15 @@
+/**
+ * Movie card loading skeleton.
+ *
+ * Mirrors the final MovieCard layout to reduce visual shift while metadata is
+ * being fetched from the movie API route.
+ */
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
+/**
+ * Placeholder UI shown during the metadata-loading phase.
+ */
 export function MovieCardSkeleton() {
   return (
     <Card className="w-full max-w-4xl overflow-hidden border-border/40 shadow-lg">

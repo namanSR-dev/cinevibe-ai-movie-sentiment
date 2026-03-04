@@ -1,0 +1,6 @@
+export type SentimentErrorCode =
+  | "INVALID_IMDB_ID"
+  | "TMDB_MOVIE_NOT_FOUND"
+  | "NO_REVIEWS_AVAILABLE"
+  | "AI_ANALYSIS_FAILED"
+  | "NETWORK_ERROR";

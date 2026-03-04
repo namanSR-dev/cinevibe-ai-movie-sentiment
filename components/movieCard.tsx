@@ -1,8 +1,16 @@
+/**
+ * Movie presentation card.
+ *
+ * Displays normalized movie metadata returned from the fast OMDb pipeline step.
+ */
 import { Card, CardContent } from "@/components/ui/card";
 import { Movie } from "@/types/movie";
 import Image from "next/image";
 import { Star, Clock, Film, User, Calendar } from "lucide-react";
 
+/**
+ * Renders a detailed but compact view of the selected movie.
+ */
 export function MovieCard({ movie }: { movie: Movie }) {
   return (
     <div className="w-full max-w-4xl">
