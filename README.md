@@ -1,36 +1,302 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CineVibe — AI Movie Sentiment Analyzer
 
-## Getting Started
+CineVibe is an AI-powered movie review analysis platform that collects real audience reviews and generates structured sentiment insights using a Large Language Model.
 
-First, run the development server:
+The system demonstrates how modern applications can combine **external APIs, AI models, and progressive UI rendering** to transform unstructured text into meaningful insights.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This project was developed to demonstrate strong skills in:
+
+- Full-stack development
+- API orchestration
+- AI integration
+- System design
+- Error handling
+- Unit testing
+- Developer documentation
+
+---
+
+# System Architecture
+
+The platform follows a clean service pipeline that orchestrates multiple APIs and an AI model.
+
+![System Architecture](./public/User%20Sentiment%20Analysis-2026-03-04-152225.svg)
+
+High-level flow:
+
+User Input
+→ Movie Metadata (OMDb API)
+→ Audience Reviews (TMDB API)
+→ Review Sanitization
+→ AI Sentiment Analysis (Gemini)
+→ Structured Insights
+
+---
+
+# Key Features
+
+## Movie Metadata Retrieval
+
+Movie details are fetched using the **OMDb API**.
+
+Metadata includes:
+
+- Title
+- Poster
+- Release date
+- Director
+- Genre
+- Runtime
+- Cast
+- IMDb rating
+- Plot summary
+
+The metadata is displayed immediately to provide fast feedback to the user.
+
+---
+
+## Audience Review Collection
+
+The system collects real audience reviews from **TMDB**.
+
+Since TMDB does not directly accept IMDb IDs, the system performs a conversion:
+
+IMDb ID → TMDB Movie ID
+
+Reviews are then retrieved using the TMDB identifier.
+
+---
+
+## AI Sentiment Analysis
+
+Audience reviews are analyzed using **Google Gemini AI**.
+
+The model produces structured insights including:
+
+- Overall sentiment
+- Confidence level
+- Summary of audience opinion
+- Key strengths highlighted by viewers
+- Common weaknesses mentioned in reviews
+
+The AI output is parsed into a structured format before being rendered in the UI.
+
+---
+
+## Progressive UI Rendering
+
+To improve perceived performance, the application uses a **progressive loading strategy**.
+
+1. Movie metadata loads first
+2. AI analysis runs in the background
+3. Sentiment insights appear once analysis completes
+
+Skeleton loaders and animations provide visual feedback during processing.
+
+---
+
+## Robust Error Handling
+
+The system includes structured error handling to provide meaningful feedback to users.
+
+Examples handled:
+
+- Invalid IMDb ID
+- Movie not found
+- No audience reviews available
+- AI analysis failure
+- Network errors
+
+Errors are displayed using **toast notifications** to maintain a clean UI.
+
+---
+
+# Project Architecture
+
+```
+app/
+├ api/
+│ ├ movie/
+│ └ sentiment/
+
+components/
+├ movieCard
+├ sentimentCard
+├ skeleton loaders
+
+lib/
+├ api/
+│ ├ omdb.ts
+│ └ tmdb.ts
+│
+├ ai/
+│ └ gemini.ts
+│
+└ utils/
+├ validation.ts
+└ parser.ts
+
+types/
+├ movie.ts
+└ sentiment.ts
+
+tests/
+├ validation.test.ts
+├ parser.test.ts
+└ tmdb.test.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Each module has a clearly defined responsibility which helps maintain clean separation of concerns.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Technology Stack
 
-## Learn More
+Frontend
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js (App Router)
+- TypeScript
+- TailwindCSS
+- shadcn/ui
+- Framer Motion
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Backend
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Next.js API Routes
 
-## Deploy on Vercel
+External APIs
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- OMDb API — movie metadata
+- TMDB API — audience reviews
+- Google Gemini — AI sentiment analysis
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Testing
+
+- Vitest — unit testing framework
+
+---
+
+# Unit Testing
+
+The project includes unit tests to validate important logic within the system.
+
+Tests focus on **pure functions and data transformations** rather than UI components.
+
+### IMDb Validation
+
+Ensures user input follows valid IMDb ID format.
+
+Example:
+
+```
+tt0133093 → valid
+tt123 → invalid
+```
+
+---
+
+### Review Sanitization
+
+Ensures review data is cleaned before sending it to the AI model.
+
+The process:
+
+- removes empty reviews
+- trims whitespace
+- limits review count to control token usage
+
+---
+
+### AI Response Parsing
+
+Ensures AI output is safely converted into the expected sentiment format.
+
+This prevents malformed responses from breaking the system.
+
+---
+
+# Performance Considerations
+
+Several design decisions were implemented to keep the system responsive.
+
+- Progressive data loading
+- Skeleton loaders for perceived speed
+- Review limiting before AI inference
+- Clean API separation
+- Defensive error handling
+
+These ensure the system remains usable even when AI processing takes longer.
+
+---
+
+# Running the Project
+
+Clone the repository:
+
+git clone `<repository-url>`
+
+Install dependencies:
+
+npm install
+
+Create environment variables:
+
+```
+OMDB_API_KEY=your_key
+TMDB_API_KEY=your_key
+GEMINI_API_KEY=your_key
+```
+
+Run the development server:
+
+```
+npm run dev
+
+Run unit tests:
+
+npm run test
+```
+
+---
+
+# Engineering Notes
+
+Several architectural decisions were made intentionally.
+
+### API Separation
+
+Movie metadata and AI analysis use different API routes.
+This allows the UI to render partial results quickly.
+
+### AI Response Validation
+
+AI outputs are parsed and validated before rendering to prevent malformed responses from affecting the UI.
+
+### Review Limiting
+
+The number of reviews sent to the AI model is capped to control token usage and reduce latency.
+
+---
+
+# Potential Future Improvements
+
+Possible production enhancements include:
+
+- API response caching
+- Rate limiting
+- Movie search by title
+- Historical sentiment tracking
+- Improved AI summarization strategies
+
+---
+
+# Author
+
+***Naman Singh
+B.Tech Computer Science & Engineering***
+
+***email* **: namansingh99694@gmail.com
+
+This project demonstrates full-stack development practices, structured API orchestration, and responsible integration of AI systems.
+
+---
