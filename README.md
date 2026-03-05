@@ -1,5 +1,7 @@
 # CineVibe — AI Movie Sentiment Analyzer
 
+***LIVE DEMO** : https://cinevibe-ai-movie-sentiment.vercel.app*
+
 CineVibe is an AI-powered movie review analysis platform that collects real audience reviews and generates structured sentiment insights using a Large Language Model.
 
 The system demonstrates how modern applications can combine **external APIs, AI models, and progressive UI rendering** to transform unstructured text into meaningful insights.
